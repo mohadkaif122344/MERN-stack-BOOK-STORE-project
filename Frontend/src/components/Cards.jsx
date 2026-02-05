@@ -1,7 +1,8 @@
-import React from "react";
-function Cards({ item }) {
+import React from 'react'
+
+const Cards = ({item}) => {
   return (
-    <>
+   <>
       <div className="mt-4 my-3 p-4">
         <div className="card w-80 h-96 bg-base-100 shadow-xl hover:scale-105 duration-200 dark:bg-slate-900 dark:text-white dark:border object-contain">
           <figure>
@@ -23,10 +24,7 @@ function Cards({ item }) {
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default Cards;
-    
-
-
+export default Cards

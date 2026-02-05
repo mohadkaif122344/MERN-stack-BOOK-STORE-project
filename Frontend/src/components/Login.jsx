@@ -39,7 +39,7 @@ function Login() {
   return (
     <div>
       <dialog id="my_modal_3" className="modal">
-        <div className="modal-box">
+        <div className="modal-box dark:bg-gray-800">
           <form onSubmit={handleSubmit(onSubmit)} method="dialog">
             <Link
               to="/"
@@ -49,7 +49,7 @@ function Login() {
               ✕
             </Link>
 
-            <h3 className="font-bold text-lg text-gray-600">Login</h3>
+            <h3 className="font-bold text-lg dark:text-white text-gray-800">Login</h3>
 
             <div className="mt-4 space-y-2">
               <span className="text-gray-600">Email</span>
@@ -57,7 +57,7 @@ function Login() {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="w-80 px-3 py-1 border rounded-md outline-none caret-black"
+                className="w-80 px-3 py-1 border rounded-md outline-none caret-black text-gray-500"
                 {...register("email", { required: true })}
               />
               <br />
@@ -74,7 +74,7 @@ function Login() {
               <input
                 type="password"
                 placeholder="Enter your password"
-                className="w-80 px-3 py-1 border rounded-md outline-none caret-black"
+                className="w-80 px-3 py-1 border rounded-md outline-none caret-black text-gray-500"
                 {...register("password", { required: true })}
               />
               <br />
