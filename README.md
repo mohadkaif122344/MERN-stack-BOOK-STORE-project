@@ -142,7 +142,7 @@ Frontend normally runs on:
 http://localhost:5173
 ```
 ### 🔄 Application Flow
-
+```
 Home
  │
  ├── Browse Books
@@ -159,7 +159,7 @@ Home
           │
           ▼
       Book Listing
-
+```
 ### 🔮 Future Improvements
 
 - JWT authentication
