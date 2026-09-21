@@ -1,8 +1,8 @@
-##📚 MERN Book Store
+## 📚 MERN Book Store
 
 A full-stack Book Store web application built with the MERN stack. The project includes book listing, user signup/login, protected course/book access, contact form, responsive UI, and light/dark mode.
 
-###🚀 Features
+### 🚀 Features
 
 - User Signup & Login
 - Logout functionality
@@ -16,7 +16,7 @@ A full-stack Book Store web application built with the MERN stack. The project i
 - React Hook Form validation
 - MongoDB integration
 
-###🛠️ Tech Stack
+### 🛠️ Tech Stack
 
 Frontend
 
@@ -40,7 +40,7 @@ Backend
 - CORS
 - dotenv
 
-###📂 Project Structure
+### 📂 Project Structure
 ```
 MERN-stack-BOOK-STORE-project-main/
 ├── Backend/
@@ -70,7 +70,7 @@ MERN-stack-BOOK-STORE-project-main/
 │
 └── README.md
 ```
-###🧭 Frontend Routes
+### 🧭 Frontend Routes
 
 Route| Access
 ```
@@ -80,7 +80,7 @@ Route| Access
 "/about"| Public
 "/contact"| Public
 ```
-###🌐 API Endpoints
+### 🌐 API Endpoints
 
 Books
 ```
@@ -93,7 +93,7 @@ Users
 POST /user/signup
 POST /user/login
 ```
-###🔐 Authentication
+### 🔐 Authentication
 
 The frontend stores the logged-in user in "localStorage" using the key:
 
@@ -116,7 +116,7 @@ Example:
 MongoDBURI=your_mongodb_connection_string
 PORT=3000
 ```
-###💻 Setup
+### 💻 Setup
 
 Backend
 ```
@@ -141,7 +141,7 @@ Frontend normally runs on:
 ```
 http://localhost:5173
 ```
-###🔄 Application Flow
+### 🔄 Application Flow
 
 Home
  │
@@ -160,7 +160,7 @@ Home
           ▼
       Book Listing
 
-###🔮 Future Improvements
+### 🔮 Future Improvements
 
 - JWT authentication
 - User-specific authorization
@@ -173,7 +173,7 @@ Home
 - Order management
 - Production deployment
 
-###👨‍💻 Author
+### 👨‍💻 Author
 
 Mohad Kaif
 ```
