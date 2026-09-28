@@ -1,5 +1,8 @@
 ## 📚 MERN Book Store
 
+<img width="1902" height="836" alt="BookStore" src="https://github.com/user-attachments/assets/13ef696d-da8a-4098-86d8-10bf3e0be4d1" />
+
+
 A full-stack Book Store web application built with the MERN stack. The project includes book listing, user signup/login, protected course/book access, contact form, responsive UI, and light/dark mode.
 
 ### 🚀 Features
