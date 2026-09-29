@@ -1,113 +1,96 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-function Login() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthProvider";
 
-  const onSubmit = async (data) => {
-    const userInfo = {
-      email: data.email,
-      password: data.password,
-    };
-    await axios
-      .post("http://localhost:3000/user/login", userInfo)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data) {
-          toast.success("Loggedin Successfully");
-          document.getElementById("my_modal_3").close();
-          setTimeout(() => {
-            window.location.reload();
-            localStorage.setItem("Users", JSON.stringify(res.data.user));
-          }, 1000);
+const Login = () => {
+  const navigate = useNavigate();
+  const { setAuthUser,API } = useContext(AuthContext);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const LoginOnSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        `${API}/user/login`,
+        {
+          email,
+          password,
         }
-      })
-      .catch((err) => {
-        if (err.response) {
-          console.log(err);
-          toast.error("Error: " + err.response.data.message);
-          setTimeout(() => {}, 2000);
-        }
-      });
+      );
+      setAuthUser(data.user);
+      toast.success("Loggedin Successfully");
+      navigate("/");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
+
   return (
-    <div>
-      <dialog id="my_modal_3" className="modal">
-        <div className="modal-box dark:bg-gray-800">
-          <form onSubmit={handleSubmit(onSubmit)} method="dialog">
-            <Link
-              to="/"
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-gray-600"
-              onClick={() => document.getElementById("my_modal_3").close()}
-            >
-              ✕
-            </Link>
-
-            <h3 className="font-bold text-lg dark:text-white text-gray-800">Login</h3>
-
-            <div className="mt-4 space-y-2">
-              <span className="text-gray-600">Email</span>
-              <br />
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-80 px-3 py-1 border rounded-md outline-none caret-black text-gray-500"
-                {...register("email", { required: true })}
-              />
-              <br />
-              {errors.email && (
-                <span className="text-sm text-red-500">
-                  This field is required
-                </span>
-              )}
-            </div>
-           
-            <div className="mt-4 space-y-2">
-              <span className="text-gray-600">Password</span>
-              <br />
-              <input
-                type="password"
-                placeholder="Enter your password"
-                className="w-80 px-3 py-1 border rounded-md outline-none caret-black text-gray-500"
-                {...register("password", { required: true })}
-              />
-              <br />
-              {errors.password && (
-                <span className="text-sm text-red-500">
-                  This field is required
-                </span>
-              )}
-            </div>
-
-            <div className="flex justify-around mt-6">
-              <button className="bg-pink-500 text-white rounded-md px-3 py-1 hover:bg-pink-700 duration-200">
-                Login
-              </button>
-
-              <p className="text-gray-600 dark:text-gray-500">
-                Not registered?{" "}
-                <Link
-                  to="/signup"
-                  className="underline text-blue-500 cursor-pointer"
-                  onClick={() => {
-                    document.getElementById("my_modal_3").close();
-                  }}
-                >
-                  Signup
-                </Link>
-              </p>
-            </div>
-          </form>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-slate-900 px-4">
+      <div className="w-full max-w-md bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8">
+        <Link
+          to="/"
+          className="float-right text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white text-xl"
+        >
+          ✕
+        </Link>
+        <div className="mb-6">
+          <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
+            Welcome Back 
+          </h3>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            Login to continue to BookStore
+          </p>
         </div>
-      </dialog>
+        <form onSubmit={LoginOnSubmit}>
+          <div className="mb-5">
+            <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+              Email
+            </label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg outline-none bg-white dark:bg-slate-700 text-gray-800 dark:text-white placeholder-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-6">
+            <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+              Password
+            </label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg outline-none bg-white dark:bg-slate-700 text-gray-800 dark:text-white placeholder-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-pink-500 text-white py-3 rounded-lg font-medium hover:bg-pink-600 active:scale-[0.98] duration-200"
+          >
+            Login
+          </button>
+        </form>
+        <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-6">
+          Don't have an account?{" "}
+          <Link
+            to="/signup"
+            className="text-pink-500 font-medium hover:underline"
+          >
+            Signup
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
-
 export default Login;

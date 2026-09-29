@@ -1,15 +1,28 @@
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext();
-export default function AuthProvider({ children }) {
-  const initialAuthUser = localStorage.getItem("Users");
-  const [authUser, setAuthUser] = useState(
-    initialAuthUser ? JSON.parse(initialAuthUser) : undefined
-  );
+
+const API = import.meta.env.VITE_BACKEND_URL;
+
+const AuthProvider = ({ children }) => {
+  const [authUser, setAuthUser] = useState(() => {
+    const user = localStorage.getItem("authUser");
+    return user ? JSON.parse(user) : null;
+  });
+
+  useEffect(() => {
+    if (authUser) {
+      localStorage.setItem("authUser", JSON.stringify(authUser));
+    } else {
+      localStorage.removeItem("authUser");
+    }
+  }, [authUser]);
+
   return (
-    <AuthContext.Provider value={[authUser, setAuthUser]}>
+    <AuthContext.Provider value={{ authUser, setAuthUser,API }}>
       {children}
     </AuthContext.Provider>
   );
 }
-export const useAuth = () => useContext(AuthContext);
+
+export default AuthProvider;
